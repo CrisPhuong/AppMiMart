@@ -1,8 +1,8 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, ScrollView,Dimensions } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Header from '../component/Header'
-
+let {height , width} = Dimensions.get("window");
 const ImageBanner = [
     {
         src:{uri:'https://cdn.tgdd.vn/bachhoaxanh/banners/2784/banner-landingpage-2784-05052020104354.jpg'}
@@ -15,7 +15,69 @@ const ImageBanner = [
     }
 ]
 
+const ImageCategories = [
+    {
+        name:"Thực phẩm",
+        src:{uri:'https://babuki.vn/wp-content/uploads/2019/02/vi-sao-nen-mua-thuc-pham-tuoi-song-tai-bach-hoa-xanh-hinh-1_760x507.jpg'}
+    },
+    {
+        name:"Món ăn",
+        src:{uri:'https://du-lich-da-lat.com/wp-content/uploads/2019/09/an-trua-o-da-lat-1024x652.jpg'}
+    },
+    {
+        name:"Nước giải khát",
+        src:{uri:'https://dayphache.edu.vn/wp-content/uploads/2019/05/do-uong-khong-con-dong-chai.jpg'}
+    },
+    
+]
+
+function Item({src,name}){
+    return (
+        <View style ={{padding:10, alignItems:'center', backgroundColor:'white', borderRadius:10, marginTop:10}}>
+            <TouchableOpacity>  
+                    <Image
+                        style = {{width:100,height:100, borderRadius:100}}
+                        resizeMode = "contain"
+                        source = {src}
+                    />
+            </TouchableOpacity>
+            <Text style ={{fontWeight:'bold',fontSize:18}}>{name}</Text>
+        </View>
+    )
+}
+
+function renderItemFood(item){
+    return(
+        <View>
+            <TouchableOpacity style = {styles.divfood}>
+                <Image style = {styles.imageFood}
+                    resizeMode = "contain"
+                    source = {{uri:item.image}}
+                />
+                <View style = {{height:((width/2)-20)-90,width:((width/2)-20)-10,backgroundColor:'transparent' }}></View>
+                <Text style = {{fontSize:15, fontWeight:'bold'}}>{item.name}</Text>
+                <Text style = {{fontSize:15, fontWeight:'bold'}}>{item.price}$</Text>
+                <TouchableOpacity>
+                    <Text style = {{fontWeight:15,fontWeight:'bold',color:''}}>Mua</Text>
+                </TouchableOpacity>
+            </TouchableOpacity>
+           
+        </View>
+    )
+}
+
 const HomeScreen = () => {
+
+    
+    const [dataFood,setDataFood] = useState([]);
+    useEffect(() => {
+      fetch('https://tutofox.com/foodapp/api.json')
+        .then((response) => response.json())
+       
+        .then((json) => setDataFood(json.food))
+        .catch((error) => console.error(error))
+    }, []);
+
     return (
         
         <View style = {styles.container}>
@@ -40,8 +102,21 @@ const HomeScreen = () => {
                     }
                 </Swiper>
             </View>
-            <View>
-            
+            <View style = {styles.CategoriesGroup}>
+                    <FlatList
+                            horizontal = {true}
+                            data ={ImageCategories}
+                            renderItem = {({item}) => <Item name = {item.name} src = {item.src}/>}
+                            keyExtractor = {(item,index) => index.toString()}
+                    />   
+            </View>
+            <View style = {{marginTop:20}}>
+                <FlatList
+                    data = {dataFood}
+                    numColumns = {2}
+                    renderItem = {({item}) => renderItemFood(item)}
+                    keyExtractor = {(item,index) => index.toString()}
+                />
             </View>
             </ScrollView>
         </View>
@@ -93,5 +168,25 @@ const styles = StyleSheet.create({
         position:'absolute',
         width:Dimensions.get("window").width,
         height:225
+    }, 
+    imageFood:{
+        width:((width/2)-20)-10,
+        height:((width/2)-20)-30,
+        backgroundColor:'transparent',
+        position:'absolute',
+        top:-45
+    },
+    divfood:{
+        width:(width/2)-20,
+        padding:10,
+        borderRadius:10,
+        marginBottom:5,
+        marginLeft:10,
+        marginTop:40,
+        alignItems:'center',
+        elevation:8,
+        shadowOpacity:0.3,
+        shadowRadius:50,
+        backgroundColor:'white'
     }
 })

@@ -1,12 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Appcontainer from './src/navigation/index'
-
+import IndexContainer from './src/navigation/IndexContainer'
 
 export default function App(){
   return (
     <View style = {styles.container}>
-      <Appcontainer/>
+        <IndexContainer/>
     </View>
   )
 }
