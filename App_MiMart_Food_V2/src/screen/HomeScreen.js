@@ -3,17 +3,14 @@ import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, ScrollView,D
 import Swiper from 'react-native-swiper'
 import Header from '../component/Header'
 let {height , width} = Dimensions.get("window");
-const ImageBanner = [
-    {
-        src:{uri:'https://cdn.tgdd.vn/bachhoaxanh/banners/2784/banner-landingpage-2784-05052020104354.jpg'}
-    },
-    {
-        src:{uri:'https://cdn.tgdd.vn/bachhoaxanh/banners/2785/banner-landingpage-2785-080520209918.jpg'}
-    },
-    {
-        src:{uri:'https://cdn.tgdd.vn/bachhoaxanh/banners/2783/banner-landingpage-2783-29042020231827.jpg'}
-    }
-]
+import {ImageBanner} from '../../Data'
+
+import { useNavigation } from '@react-navigation/native';
+import {dataFoodStore} from '../../Data'
+import ShopingCartIcon from '../component/ShopingCartIcon'
+// Redux
+import  {ADD_TO_CART} from '../../reducer/Reducer'
+import {useDispatch} from 'react-redux'
 
 const ImageCategories = [
     {
@@ -46,37 +43,15 @@ function Item({src,name}){
     )
 }
 
-function renderItemFood(item){
-    return(
-        <View>
-            <TouchableOpacity style = {styles.divfood}>
-                <Image style = {styles.imageFood}
-                    resizeMode = "contain"
-                    source = {{uri:item.image}}
-                />
-                <View style = {{height:((width/2)-20)-90,width:((width/2)-20)-10,backgroundColor:'transparent' }}></View>
-                <Text style = {{fontSize:15, fontWeight:'bold'}}>{item.name}</Text>
-                <Text style = {{fontSize:15, fontWeight:'bold'}}>{item.price}$</Text>
-                <TouchableOpacity>
-                    <Text style = {{fontWeight:15,fontWeight:'bold',color:''}}>Mua</Text>
-                </TouchableOpacity>
-            </TouchableOpacity>
-           
-        </View>
-    )
-}
 
 const HomeScreen = () => {
 
+    const dispatch = useDispatch()
+    const addItemToCart = item => dispatch({ type: ADD_TO_CART, payload: item })
+
+    const [dataFood,setDataFood] = useState(dataFoodStore);
     
-    const [dataFood,setDataFood] = useState([]);
-    useEffect(() => {
-      fetch('https://tutofox.com/foodapp/api.json')
-        .then((response) => response.json())
-       
-        .then((json) => setDataFood(json.food))
-        .catch((error) => console.error(error))
-    }, []);
+    const navigation = useNavigation();
 
     return (
         
@@ -85,6 +60,9 @@ const HomeScreen = () => {
             <ScrollView>
             <View style = {styles.headerTextHi}>
                 <Text style = {styles.titleTextHi}>Welcome MiMart Food</Text>
+                <View style = {{marginTop:10, flexDirection:'row'}}>
+                    <ShopingCartIcon/>
+                </View>
             </View>
             <View style = {styles.banercontainer}>
                 <Swiper style = {styles.bannerSwiper} autoplay = {true} autoplayTimeout = {2}>
@@ -110,11 +88,26 @@ const HomeScreen = () => {
                             keyExtractor = {(item,index) => index.toString()}
                     />   
             </View>
-            <View style = {{marginTop:20}}>
+            <View>
                 <FlatList
                     data = {dataFood}
                     numColumns = {2}
-                    renderItem = {({item}) => renderItemFood(item)}
+                    renderItem = {({item}) => (
+                        <View>
+                        <TouchableOpacity style = {styles.divfood}>
+                            <Image style = {styles.imageFood}
+                                resizeMode = "contain"
+                                source = {item.src}
+                            />
+                            <Text style = {{fontSize:15, fontWeight:'bold',textAlign:'center'}}>{item.name}</Text>
+                            <Text style = {{fontSize:15, fontWeight:'bold',textAlign:'center'}}>{item.price}$</Text>
+                            <TouchableOpacity onPress={() => addItemToCart(item)}>
+                                <Text style = {{fontSize:18,fontWeight:'bold',color:'red',}}>Mua</Text>
+                            </TouchableOpacity>
+                        </TouchableOpacity>
+                       
+                    </View>
+                    )}
                     keyExtractor = {(item,index) => index.toString()}
                 />
             </View>
@@ -133,7 +126,9 @@ const styles = StyleSheet.create({
     headerTextHi:{
         padding:20,
         paddingHorizontal:30,
-        marginTop:50
+        marginTop:40,
+        flexDirection:'row',
+        marginRight:15
     },
     titleTextHi:{
        fontSize:30,
@@ -167,26 +162,27 @@ const styles = StyleSheet.create({
     header:{
         position:'absolute',
         width:Dimensions.get("window").width,
-        height:225
+        
     }, 
     imageFood:{
-        width:((width/2)-20)-10,
-        height:((width/2)-20)-30,
+        width:100,
+        height:100,
         backgroundColor:'transparent',
-        position:'absolute',
-        top:-45
+        
     },
     divfood:{
         width:(width/2)-20,
+        height:200,
         padding:10,
         borderRadius:10,
         marginBottom:5,
         marginLeft:10,
-        marginTop:40,
+        marginTop:20,
         alignItems:'center',
+        justifyContent:'center',
         elevation:8,
         shadowOpacity:0.3,
         shadowRadius:50,
-        backgroundColor:'white'
+        backgroundColor:'white',
     }
 })
