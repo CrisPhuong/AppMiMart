@@ -69,7 +69,7 @@ const CartScreen = () => {
                 }
 
                 </View>
-                <View style = {{flex:0.15,backgroundColor:'red'}}>
+                <View style = {{flex:0.15,backgroundColor:'white'}}>
         
                 </View>
         </View>

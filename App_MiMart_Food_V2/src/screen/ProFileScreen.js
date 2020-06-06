@@ -1,9 +1,11 @@
-import React, {useState,useEffect} from 'react'
-import { StyleSheet, Text, View,Dimensions } from 'react-native'
+import React, {useState,useEffect, useContext} from 'react'
+import { StyleSheet, Text, View,Dimensions, TouchableOpacity } from 'react-native'
+import {useNavigation} from '@react-navigation/native'
 import Header from '../component/Header'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import {AuthContext} from '../navigation/Context'
 const ProFileScreen = () => {
-
+    const navigation = useNavigation();
+    const { signOut } = useContext(AuthContext);
     return (
         <View>
             <Header/>
@@ -40,7 +42,7 @@ const ProFileScreen = () => {
                     </TouchableOpacity>
                 </View>
                 <View style = {styles.containerButton}>
-                    <TouchableOpacity style = {styles.button}> 
+                    <TouchableOpacity style = {styles.button} onPress = {() => {signOut()}}> 
                         <Text style = {styles.titleTextCart}>Đăng xuất</Text>
                     </TouchableOpacity>
                 </View>

@@ -11,6 +11,7 @@ export default function App(){
     <StoreProvider store={store}>
       <IndexContainer/>
     </StoreProvider>
+    // <Demo/>
   )
 }
 

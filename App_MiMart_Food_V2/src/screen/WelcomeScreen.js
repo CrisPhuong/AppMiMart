@@ -3,6 +3,7 @@ import { StyleSheet, Text, View ,TouchableOpacity,Image,Dimensions} from 'react-
 import Swiper from 'react-native-swiper'
 import { LinearGradient } from 'expo-linear-gradient';
 import {useNavigation} from '@react-navigation/native'
+import * as Animatable from 'react-native-animatable';
 let {height , width} = Dimensions.get("window");
 
 const dataBanner =[
@@ -20,12 +21,13 @@ const WelcomeScreen = () => {
 
     const navigation = useNavigation();
     return (
-        <View style = {styles.container}>
+        <View  style = {styles.container}>
             <LinearGradient colors = {['#EE82EE','#f3a5f3','#f9d2f9']} style = {{flex:1}}>
                 <View style = {styles.titleGroup}>
                     <Text style = {styles.nameApp}>MiMart</Text>
                 </View>
-                <View style = {styles.bannerGroup}>
+                
+                <Animatable.View animation="fadeInLeft" style = {styles.bannerGroup}>
                     <Swiper>
                         {
                             dataBanner.map((item) =>{
@@ -39,8 +41,9 @@ const WelcomeScreen = () => {
                             })
                         }
                     </Swiper>
-                </View>
-                <View style = {styles.bottonGroup}>
+                </Animatable.View>
+
+                <Animatable.View animation = "fadeInRightBig" style = {styles.bottonGroup}>
                     <View style = {{flexDirection:'row'}}>
                         <Text style = {{fontSize:18,fontWeight:'bold'}}>Hãy cảm nhận và trải nghiệm </Text>
                         <Image style = {{width:30, height:30}} source = {{uri:'https://image.flaticon.com/icons/png/512/148/148836.png'}}/>
@@ -48,7 +51,7 @@ const WelcomeScreen = () => {
                     <TouchableOpacity style={styles.btnLetGo} onPress = {() => navigation.navigate('login')}>
                         <Text style = {styles.txtTitle}>Let go!</Text>
                     </TouchableOpacity>
-                </View>
+                </Animatable.View>
             </LinearGradient>
         </View>
 

@@ -4,7 +4,7 @@ import axios from 'axios'
 const Demo = () => {
     axios({
         method : 'GET',
-        url : 'http://10.20.15.203:5000/api/Products',
+        url : 'http://localhost:5000/api/Products',
         data:null
     }).then(res =>{
         console.log({res});
