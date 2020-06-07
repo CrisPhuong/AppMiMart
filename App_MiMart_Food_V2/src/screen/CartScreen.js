@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/Ionicons'
+import {SAVE_TO_SAVE} from '../../reducer/Reducer'
 
 // Redux 
 import { useSelector, useDispatch } from 'react-redux'
@@ -70,7 +71,9 @@ const CartScreen = () => {
 
                 </View>
                 <View style = {{flex:0.15,backgroundColor:'white'}}>
-        
+                    <TouchableOpacity style = {styles.buttonMua} onPress = {() => alert("Bạn có muốn thêm vào giỏ hàng không")}>
+                        <Text>Mua</Text>
+                    </TouchableOpacity>
                 </View>
         </View>
      
@@ -112,6 +115,9 @@ const styles = StyleSheet.create({
        fontWeight:'bold',
        fontSize:28,
        color:'red'
+   },
+   buttonMua:{
+       
    }
     
 })
