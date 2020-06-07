@@ -1,5 +1,5 @@
 import React,{useState, useEffect, useMemo, useReducer} from 'react';
-import {ActivityIndicator, View} from 'react-native'
+import {ActivityIndicator, View, Alert} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { AsyncStorage } from 'react-native';
@@ -66,9 +66,12 @@ const IndexContainer = () => {
             try {
               userToken = 'dfgdfg';
               await AsyncStorage.setItem('userToken', userToken);
+             Alert.alert("Đăng nhập thành công");
             } catch(e) {
               console.log(e);
             }
+          }else{
+            Alert.alert("Tài khoản hoặc mật khẩu không chính xác")
           }
           // console.log('user token: ', userToken);
           dispatch({ type: 'LOGIN', id: userName, token: userToken });

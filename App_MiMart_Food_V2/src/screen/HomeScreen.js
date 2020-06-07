@@ -94,7 +94,7 @@ const HomeScreen = () => {
                     numColumns = {2}
                     renderItem = {({item}) => (
                         <View>
-                        <TouchableOpacity style = {styles.divfood}>
+                        <TouchableOpacity style={styles.divfood}>
                             <Image style = {styles.imageFood}
                                 resizeMode = "contain"
                                 source = {item.src}

@@ -64,15 +64,15 @@ const CartScreen = () => {
                         />
                     ) : (
                             <View style={styles.contaninerNoProducts}>
-                                <Text style={styles.titleThongBao}>Không có sản phẩm nào :'(</Text>
+                                <Text style={styles.titleThongBao}>Không có sản phẩm nào</Text>
                             </View>
                     )
                 }
 
                 </View>
-                <View style = {{flex:0.15,backgroundColor:'white'}}>
-                    <TouchableOpacity style = {styles.buttonMua} onPress = {() => alert("Bạn có muốn thêm vào giỏ hàng không")}>
-                        <Text>Mua</Text>
+                <View style = {{flex:0.15,backgroundColor:'white',justifyContent:'center', alignItems:'center'}}>
+                    <TouchableOpacity style = {styles.buttonMua} onPress = {() => alert("Bạn muốn mua chứ")}>
+                        <Text style = {{fontSize:18,fontWeight:'bold'}}>Đặt hàng</Text>
                     </TouchableOpacity>
                 </View>
         </View>
@@ -117,7 +117,12 @@ const styles = StyleSheet.create({
        color:'red'
    },
    buttonMua:{
-       
+    borderRadius:8,
+    backgroundColor:"pink",
+    width:50,
+    height:40,
+    justifyContent: 'center',
+    alignItems: 'center'
    }
     
 })
