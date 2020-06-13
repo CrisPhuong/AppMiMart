@@ -1,5 +1,6 @@
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+export const SAVE_TO_SAVE = 'SAVE_TO_SAVE'
 
 const initialState = []
 
@@ -9,8 +10,11 @@ const cartItemsReducer = (state = initialState, action) => {
       return [...state, action.payload]
     case REMOVE_FROM_CART:
       return state.filter(cartItem => cartItem.id !== action.payload.id)
+    case SAVE_TO_SAVE :
+      return [...state,action.payload]
   }
   return state
 }
 
 export default cartItemsReducer
+

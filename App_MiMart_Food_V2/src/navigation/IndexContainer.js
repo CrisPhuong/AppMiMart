@@ -81,6 +81,7 @@ const IndexContainer = () => {
           // setIsLoading(false);
           try {
             await AsyncStorage.removeItem('userToken');
+            Alert.alert("Bạn đã đăng xuất")
           } catch(e) {
             console.log(e);
           }

@@ -30,7 +30,8 @@ const CoOpMartScreen = () => {
                                 src:item.src,
                                 price:item.price,
                                 content:item.content,
-                                hsd:item.hsd
+                                hsd:item.hsd,
+                                nameStore:item.nameStore
                             })}>
                                 <Image style = {{width:100, height:100}}
                                     resizeMode = "contain"

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+
 
 const ChiTietProduct = ({navigation, route}) => {
     return (
@@ -13,6 +13,7 @@ const ChiTietProduct = ({navigation, route}) => {
                 <Text style = {styles.contentPrice}>- Giá: {route.params.price} VND</Text>
                 <Text style = {{fontWeight:'900',fontSize:18}}>- Chi tiết: {route.params.content}</Text>
                 <Text style = {styles.contentPrice}>- Hạn sử dụng: {route.params.hsd}</Text>
+                <Text style = {styles.contentname}>- Cửa hàng: {route.params.nameStore}</Text>
             </View>
             
         </View>

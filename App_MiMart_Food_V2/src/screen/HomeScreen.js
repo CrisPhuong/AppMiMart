@@ -94,7 +94,14 @@ const HomeScreen = () => {
                     numColumns = {2}
                     renderItem = {({item}) => (
                         <View>
-                        <TouchableOpacity style={styles.divfood}>
+                        <TouchableOpacity style={styles.divfood} onPress = {() => navigation.navigate('Store', { screen: 'chitietproduct',params:{
+                             name:item.name,
+                             src:item.src,
+                             price:item.price,
+                             content:item.content,
+                             hsd:item.hsd,
+                             nameStore:item.nameStore
+                        }})}>
                             <Image style = {styles.imageFood}
                                 resizeMode = "contain"
                                 source = {item.src}
