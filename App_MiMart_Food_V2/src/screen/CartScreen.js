@@ -9,20 +9,19 @@ import {
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/Ionicons'
-import {SAVE_TO_SAVE} from '../../reducer/Reducer'
+
 
 // Redux 
 import { useSelector, useDispatch } from 'react-redux'
 import { REMOVE_FROM_CART } from '../../reducer/Reducer'
 const CartScreen = () => {
-    const cartItems = useSelector(state => state)
+    const cartItems= useSelector(state => state)
     const dispatch = useDispatch()
     const removeItemFromCart = item =>
         dispatch({
         type: REMOVE_FROM_CART,
         payload: item
     })
-    
     return (
         <View style = {{flex:1}}>
             <View style = {{flex:0.85, backgroundColor:'#f2f2f2'}}>
@@ -31,15 +30,13 @@ const CartScreen = () => {
                     cartItems.length !== 0 ? (
                         <FlatList
                             data={cartItems}
-                            keyExtractor={item => item.id.toString()}
+                            keyExtractor={item => item._id.toString()}
                             renderItem={({ item,i }) => (
                                 <View style={styles.containerProducts}>
-                                    
-                                        <Image source={item.src } style={styles.imageProducts} />
-                                
+                                    <Image source={{uri:item.productImage} } style={styles.imageProducts} />
                                     <View style = {styles.titleGroup}>
                                         <Text style = {{textAlign:'center',fontSize:15,fontWeight:'bold'}}>{item.name}</Text>
-                                        <Text style = {{fontSize:15,fontWeight:'bold',color:'red'}} >Giá: {item.price} VND</Text>
+                                        <Text style = {{fontSize:15,fontWeight:'bold',color:'red'}} >Giá: {item.price} đ</Text>
                                         
                                         <View style = {{flexDirection:'row',alignItems:'center'}}>
                                                     {/* Nút giảm "-" */}
@@ -59,6 +56,7 @@ const CartScreen = () => {
                                             </TouchableOpacity>
                                         </View>
                                     </View>
+                                    
                                 </View>
                             )}
                         />
@@ -119,7 +117,7 @@ const styles = StyleSheet.create({
    buttonMua:{
     borderRadius:8,
     backgroundColor:"pink",
-    width:50,
+    width:100,
     height:40,
     justifyContent: 'center',
     alignItems: 'center'

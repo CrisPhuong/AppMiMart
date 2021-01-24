@@ -8,13 +8,13 @@ let {height , width} = Dimensions.get("window");
 
 const dataBanner =[
     {
-        src:{uri:'https://i.pinimg.com/564x/c6/6b/a3/c66ba31847bf2d66ee9b450642fca251.jpg'}
+        src:{uri:'https://vcdn-kinhdoanh.vnecdn.net/2019/05/23/2035292151-w500-3320-1558601736.png'}
     },
     {
-        src:{uri:'https://i.pinimg.com/564x/e2/b7/ab/e2b7abb0de778d806006bcaa1914c295.jpg'}
+        src:{uri:'https://thegioihoinhap.vn/data/uploads/2020/09/vinshop.jpg'}
     },
     {
-        src:{uri:'https://i.pinimg.com/564x/29/41/53/294153d388cb4b80cee1f4fa1aa60758.jpg'}
+        src:{uri:'https://cafefcdn.com/2020/1/18/photo-1-1579319246946973027491.jpg'}
     },
 ]
 const WelcomeScreen = () => {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     },
     bannerGroup:{
         flex:0.8,
-        marginLeft:30,
+        marginLeft:45,
         borderRadius:20
     },
     btnLetGo:{

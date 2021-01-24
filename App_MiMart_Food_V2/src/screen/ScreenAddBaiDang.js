@@ -3,32 +3,27 @@ import { StyleSheet, Text, View, } from 'react-native'
 import { FAB,TextInput } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native';
 
-export default function ScreenAddBaiDang({navigation,route}) {
-    const [noteTitle, setNoteTitle] = useState('')
-    const [noteDescription, setNoteDescription] = useState('')
-
-    function onSaveNote(noteTitle,noteDescription) {
-        route.params.addNotes({ noteTitle, noteDescription })
-        navigation.goBack()
-    }
+export default function ScreenAddBaiDang() {
+    const [baiDang, setBaiDang] = useState('');
+    const [chiTietBaiDang, setChiTietBaiDang] = useState('');
+    const navigation = useNavigation();
+    
+    
 
     return (
         <>
-           
-           
-
             <View style={styles.container}>
                 <TextInput
-                    label="Add Note Title here"
-                    value={noteTitle}
+                    label="Tên Bài Đăng"
+                    value={baiDang}
                     mode='outlined'
-                    onChangeText={setNoteTitle}
+                    onChangeText={setBaiDang}
                     style={styles.title}
                 />
                 <TextInput
-                    label="Add Note Description"
-                    value={noteDescription}
-                    onChangeText={setNoteDescription}
+                    label="Chi tiết bài đăng"
+                    value={chiTietBaiDang}
+                    onChangeText={setChiTietBaiDang}
                     mode="flat"
                     multiline={true}
                     style={styles.text}
@@ -40,8 +35,11 @@ export default function ScreenAddBaiDang({navigation,route}) {
                     style={styles.fab}
                     small
                     icon="check"
-                    disabled={noteTitle == '' ? true : false}
-                    onPress={() => onSaveNote()}
+                    disabled={baiDang == '' ? true : false}
+                    onPress={() => navigation.navigate('dangbai',{
+                        baiDang:baiDang,
+                        chiTietBaiDang:chiTietBaiDang
+                    })}
                 />
             </View>
         </>

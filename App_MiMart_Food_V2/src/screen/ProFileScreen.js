@@ -44,12 +44,6 @@ const ProFileScreen = () => {
                         <Text style = {styles.titleTextCart}>Đăng bài</Text>
                     </TouchableOpacity>
                 </View>
-
-                <View style = {styles.containerButton}>
-                    <TouchableOpacity style = {styles.button}>
-                        <Text style = {styles.titleTextCart}>Đầu bếp</Text>
-                    </TouchableOpacity>
-                </View>
                 <View style = {styles.containerButton}>
                     <TouchableOpacity style = {styles.button} onPress = {() => {signOut()}}> 
                         <Text style = {styles.titleTextCart}>Đăng xuất</Text>

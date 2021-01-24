@@ -6,8 +6,7 @@ import CoOpMartScreen from './CoOpMartScreen'
 import BackHoaXanhScreen from './BackHoaXanhScreen'
 import CoopFoodScreen from './CoopFoodScreen'
 import VinMartScreen from './VinMartScreen'
-import Swiper from 'react-native-swiper'
-import {ImageBanner} from '../../Data'
+import Banner from '../component/Banner'
 import ShopingCartIcon from '../component/ShopingCartIcon'
 
 const StoreScreen = () => {
@@ -16,28 +15,16 @@ const StoreScreen = () => {
 
     return (
         <View style = {styles.comtainer}>
-            <Header/>
-            
+            <View>
+                <Header/>
+            </View>
             <View style = {styles.headercontainer}>
                 <View style = {styles.headerText}>
                     <Text style = {styles.titleTextCart}>Của hàng</Text>
                     <ShopingCartIcon/>
                 </View>
-                <View style = {styles.bannerStore}>
-                    <Swiper style = {styles.bannerSwiper} autoplay = {true} autoplayTimeout = {2}>
-                        {
-                            ImageBanner.map((item) =>{
-                                return(
-                                    <Image
-                                        key ={item}
-                                        source = {item.src}
-                                        style = {styles.bannerStyle}
-                                    />
-                                )
-                            })
-                        
-                        }
-                    </Swiper>
+                <View >
+                    <Banner/>
                 </View>
             </View>
             <ButtonGroupStore selected = {tab} onSelected = {index => setTab(index)}/>
@@ -92,7 +79,7 @@ const styles = StyleSheet.create({
         shadowRadius:4,
         height:170,
         width:300,
-        marginLeft:28
+        marginLeft:45
     },
     bannerStyle:{
         borderRadius:20,

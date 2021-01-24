@@ -1,22 +1,25 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const ButtonName = [
-    {name:"Bách Hóa Xanh"},
-    {name:"CoOp Mart"},
-    {name:"CoOp Food"},
-    {name : "Vin Mart"}
-];
+
 
 const ButtonGroupStore = ({selected,onSelected}) => {
+    const [buttonNameStore, setButtonNameStore] = useState([]);
+  
+    useEffect(() => {
+      fetch('http://192.168.1.124:3000/stores')
+        .then((response) => response.json())
+        .then((json) => setButtonNameStore(json.stores))
+        .catch((error) => console.error(error))
+    }, []);
     return (
-        <View style = {styles.buttomGroup}>
+        <View style = {styles.buttonGroup}>
             {
-                ButtonName.map((item,i) => {
+                buttonNameStore.map((item,i) => {
                     return (
                         <TouchableOpacity key = {item} onPress = {() => onSelected(i)}>
-                            <Text style = {styles.titleStore}>{item.name}</Text>
+                            <Text style = {styles.titleStore}>{item.storeName}</Text>
                         </TouchableOpacity>
                     )
                 })
@@ -28,7 +31,7 @@ const ButtonGroupStore = ({selected,onSelected}) => {
 export default ButtonGroupStore
 
 const styles = StyleSheet.create({
-    buttomGroup:{
+    buttonGroup:{
         flexDirection:'row',
         justifyContent:'space-between',
         padding:10,

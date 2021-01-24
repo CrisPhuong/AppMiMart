@@ -4,35 +4,29 @@ import { FAB, List } from 'react-native-paper'
 
 import {useNavigation} from '@react-navigation/native'
 
-export default function ScreenDangBai({navigation}) {
+export default function ScreenDangBai({navigation,route}) {
     
-    const [notes, setNotes] = useState([])
-
-    const addNotes = note => {
-        note.id = notes.length + 1
-        setNotes([...notes, note])
-    }
-
+    const [dataBaiDang, setDataBaiDang] = useState([route]);
     return (
         <>
     
             <View style={styles.container}>
-                {notes.length === 0 ? (
+                {dataBaiDang.length === 0 ? (
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Bạn chưa có bài đăng nào</Text>
                     </View>
                 ) : (
                         <FlatList
-                            data={notes}
+                            data={dataBaiDang}
                             renderItem={({ item }) => (
                                 <List.Item
-                                    title={item.noteTitle}
-                                    description={item.noteDescription}
+                                    title={item.baiDang}
+                                    description={item.chiTietBaiDang}
                                     descriptionNumberOfLines={1}
                                     titleStyle={styles.listTitle}
                                 />
                             )}
-                            keyExtractor={item => item.id.toString()}
+                           
                         />
                     )}
 
@@ -40,11 +34,9 @@ export default function ScreenDangBai({navigation}) {
                     style={styles.fab}
                     small
                     icon='plus'
-                    label='Add a new Note'
-                    onPress={() => navigation.navigate('baidang', {
-                        addNotes
-                    })
-                    }
+                    label='Thêm bài đăng'
+                    onPress={() => navigation.navigate('baidang')} 
+                    
                 />
             </View>
         </>

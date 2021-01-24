@@ -2,8 +2,8 @@ import React,{useState, useEffect, useMemo, useReducer} from 'react';
 import {ActivityIndicator, View, Alert} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import { AsyncStorage } from 'react-native';
-//improt mà hình
+
+//import mà hình
 import LoginScreen from '../screen/LoginScreen'
 import AppContainer from '../navigation/index'
 import WelcomeScreen from '../screen/WelcomeScreen'
@@ -62,7 +62,7 @@ const IndexContainer = () => {
           // setIsLoading(false);
           let userToken;
           userToken = null;
-          if( userName == 'user' && password == 'pass' ) {
+          if( userName == '0969749038' && password == '123456' ) {
             try {
               userToken = 'dfgdfg';
               await AsyncStorage.setItem('userToken', userToken);
